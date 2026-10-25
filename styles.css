@@ -839,6 +839,15 @@ body.facts-hidden .fun-fact {
     line-height: 1;
 }
 
+.time-warning {
+    margin: 0;
+    flex: 0 0 auto;
+    color: var(--coral);
+    font-size: 0.9rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
 #game-container {
     width: 100%;
     height: min(62vh, 600px);
@@ -1358,6 +1367,10 @@ body.theme-night .score-feedback {
     .score,
     .timer {
         flex: 1 1 35%;
+        text-align: center;
+    }
+
+    .time-warning {
         text-align: center;
     }
 

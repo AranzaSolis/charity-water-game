@@ -8,6 +8,7 @@ let bestScore = Number(localStorage.getItem("bestScore") || 0);
 let lastFunFactIndex = -1;
 let audioContext;
 let countdownMaker;
+let timeWarningMaker;
 let collisionChecker;
 let backgroundMusicMaker;
 let backgroundMusicStep = 0;
@@ -43,6 +44,7 @@ const homeScreen = document.getElementById("home-screen");
 const gameScreen = document.getElementById("game-screen");
 const scoreElement = document.getElementById("score");
 const timeElement = document.getElementById("time");
+const timeWarningElement = document.getElementById("time-warning");
 const totalDropsElement = document.getElementById("total-drops");
 const gameContainer = document.getElementById("game-container");
 const bucketCursor = document.getElementById("bucket-cursor");
@@ -220,20 +222,14 @@ function startGame() {
   timeRemaining = 35;
   scoreElement.textContent = score;
   timeElement.textContent = timeRemaining;
+  resetTimeWarning();
   homeScreen.hidden = true;
   gameScreen.hidden = false;
   moveBucket(gameContainer.offsetWidth / 2);
 
   scheduleNextDrop();
   collisionChecker = setInterval(checkBucketCollisions, 50);
-  countdownMaker = setInterval(() => {
-    timeRemaining -= 1;
-    timeElement.textContent = timeRemaining;
-
-    if (timeRemaining <= 0) {
-      endGame();
-    }
-  }, 1000);
+  countdownMaker = setInterval(updateCountdown, 1000);
 }
 
 function renderStore() {
@@ -309,19 +305,36 @@ function resetGame() {
   gameStartTime = Date.now();
   scoreElement.textContent = score;
   timeElement.textContent = timeRemaining;
+  resetTimeWarning();
   scheduleNextDrop();
   collisionChecker = setInterval(checkBucketCollisions, 50);
-  countdownMaker = setInterval(() => {
-    timeRemaining -= 1;
-    timeElement.textContent = timeRemaining;
-    if (timeRemaining <= 0) endGame();
-  }, 1000);
+  countdownMaker = setInterval(updateCountdown, 1000);
+}
+
+function updateCountdown() {
+  timeRemaining -= 1;
+  timeElement.textContent = timeRemaining;
+
+  if (timeRemaining === 10) {
+    timeWarningElement.hidden = false;
+    timeWarningMaker = setTimeout(() => {
+      timeWarningElement.hidden = true;
+    }, 4000);
+  }
+
+  if (timeRemaining <= 0) endGame();
+}
+
+function resetTimeWarning() {
+  clearTimeout(timeWarningMaker);
+  timeWarningElement.hidden = true;
 }
 
 function returnHome() {
   clearTimeout(dropMaker);
   clearInterval(countdownMaker);
   clearInterval(collisionChecker);
+  resetTimeWarning();
   gameRunning = false;
   gameOverDialog.close();
   clearDrops();
