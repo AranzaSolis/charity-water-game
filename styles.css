@@ -1359,19 +1359,57 @@ body.theme-night .score-feedback {
     }
 
     .score-panel {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 14px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr) minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: 4px;
+        padding: 10px 8px;
+        position: relative;
+    }
+
+    .game-controls,
+    .game-actions {
+        display: contents;
+    }
+
+    .score,
+    .timer,
+    .score-panel #restart-btn,
+    .score-panel #game-home-button {
+        min-width: 0;
+        text-align: center;
     }
 
     .score,
     .timer {
-        flex: 1 1 35%;
-        text-align: center;
+        font-size: clamp(0.7rem, 3.2vw, 0.9rem);
+    }
+
+    .timer {
+        left: 0;
+    }
+
+    .score span,
+    .timer span {
+        font-size: clamp(1rem, 4.5vw, 1.25rem);
+    }
+
+    .score-panel #restart-btn,
+    .score-panel #game-home-button {
+        padding: 6px 3px;
+        font-size: clamp(0.62rem, 2.8vw, 0.75rem);
     }
 
     .time-warning {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 50%;
+        z-index: 1;
+        padding: 2px 6px;
+        background: var(--paper);
+        border-radius: 6px;
+        transform: translateX(-50%);
         text-align: center;
+        font-size: clamp(0.65rem, 2.8vw, 0.8rem);
     }
 
     .start-button {
