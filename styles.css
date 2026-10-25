@@ -15,6 +15,7 @@
     --paper: #fffdf6;
     --coral: #f16061;
     --line: rgba(22, 50, 79, 0.12);
+    --brand-height: 48px;
 }
 
 body.theme-ocean {
@@ -129,9 +130,9 @@ main {
     align-items: center;
     height: 100svh;
     min-height: 0;
-    padding: clamp(36px, 8vh, 80px) 22px clamp(116px, 15vh, 156px);
+    padding: clamp(36px, 8vh, 80px) 22px calc(var(--brand-height) + 48px);
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
     background: linear-gradient(180deg, #dff4ff 0%, #e9f8f5 57%, #fff7dc 100%);
 }
 
@@ -389,15 +390,19 @@ main {
 }
 
 .brand-strip {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    position: fixed !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 5 !important;
     display: flex;
+    visibility: visible !important;
+    width: 100% !important;
+    height: var(--brand-height);
     align-items: center;
     justify-content: center;
     gap: 12px;
-    min-height: 48px;
+    min-height: var(--brand-height);
     padding: 4px 20px;
     color: #ffffff;
     background: #000000;
@@ -1311,6 +1316,10 @@ body.theme-night .score-feedback {
 }
 
 @media (max-width: 560px) {
+    :root {
+        --brand-height: 56px;
+    }
+
     .drop-total {
         top: 12px;
         right: 12px;
@@ -1326,9 +1335,52 @@ body.theme-night .score-feedback {
         margin-top: 38px;
     }
 
+    .home-screen {
+        height: 100svh;
+        min-height: 0;
+        padding-bottom: calc(var(--brand-height) + 12px);
+        overflow-y: auto;
+    }
+
     .can-stage {
-        flex: 0 0 clamp(150px, 26vh, 220px);
-        width: 100%;
+        flex: 0 1 clamp(120px, 24vh, 190px);
+    }
+
+    .jerry-can {
+        max-width: calc(100vw - 36px);
+    }
+
+    .fun-fact {
+        width: min(100%, 520px);
+        max-height: 64px;
+        margin: 10px auto 12px;
+        overflow: hidden;
+    }
+
+    .fun-fact p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        min-width: 0;
+        overflow: hidden;
+        overflow-wrap: anywhere;
+    }
+
+    .brand-strip {
+        position: fixed !important;
+        right: 0 !important;
+        bottom: env(safe-area-inset-bottom, 0px) !important;
+        left: 0 !important;
+        z-index: 5 !important;
+        visibility: visible !important;
+        width: 100% !important;
+        height: var(--brand-height);
+        margin: 0 !important;
+        flex-wrap: wrap;
+        min-height: var(--brand-height);
+        padding: 6px 12px;
+        gap: 4px 8px;
+        font-size: clamp(0.68rem, 2.8vw, 0.82rem);
     }
 
     .game-screen {
@@ -1336,57 +1388,19 @@ body.theme-night .score-feedback {
     }
 
     .score-panel {
-        display: grid;
-        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr) minmax(0, 1.1fr) minmax(0, 1fr);
-        gap: 4px;
-        padding: 10px 8px;
-        position: relative;
-    }
-
-    .game-controls,
-    .game-actions {
-        display: contents;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 14px;
     }
 
     .score,
-    .timer,
-    .score-panel #restart-btn,
-    .score-panel #game-home-button {
-        min-width: 0;
+    .timer {
+        flex: 1 1 35%;
         text-align: center;
-    }
-
-    .score,
-    .timer {
-        font-size: clamp(0.7rem, 3.2vw, 0.9rem);
-    }
-
-    .timer {
-        left: 0;
-    }
-
-    .score span,
-    .timer span {
-        font-size: clamp(1rem, 4.5vw, 1.25rem);
-    }
-
-    .score-panel #restart-btn,
-    .score-panel #game-home-button {
-        padding: 6px 3px;
-        font-size: clamp(0.62rem, 2.8vw, 0.75rem);
     }
 
     .time-warning {
-        position: absolute;
-        top: calc(100% + 4px);
-        left: 50%;
-        z-index: 1;
-        padding: 2px 6px;
-        background: var(--paper);
-        border-radius: 6px;
-        transform: translateX(-50%);
         text-align: center;
-        font-size: clamp(0.65rem, 2.8vw, 0.8rem);
     }
 
     .start-button {
@@ -1403,6 +1417,7 @@ body.theme-night .score-feedback {
         min-height: 0;
         height: auto;
     }
+
 }
 
 @media (max-width: 380px) {
@@ -1427,16 +1442,185 @@ body.theme-night .score-feedback {
     }
 
     .fun-fact {
-        position: absolute;
-        bottom: 54px;
-        left: 50%;
         align-items: flex-start;
         gap: 7px;
-        width: calc(100% - 28px);
         padding-right: 10px;
         padding-left: 10px;
-        margin: 0;
-        transform: translateX(-50%);
+    }
+}
+
+@media (min-width: 561px) and (max-width: 1199px) {
+    :root {
+        --brand-height: 56px;
+    }
+
+    .home-screen {
+        height: 100svh;
+        min-height: 0;
+        padding-bottom: calc(var(--brand-height) + 20px);
+        overflow-y: auto;
+    }
+
+    .can-stage {
+        flex: 0 1 clamp(150px, 28vh, 280px);
+        width: min(100%, 520px);
+    }
+
+    .home-actions {
+        top: 0;
+    }
+
+    .fun-fact {
+        top: 0;
+        margin-top: 14px;
+    }
+
+    .brand-strip {
+        position: fixed !important;
+        right: 0 !important;
+        bottom: env(safe-area-inset-bottom, 0px) !important;
+        left: 0 !important;
+        z-index: 5 !important;
+        visibility: visible !important;
+        width: 100% !important;
+        height: var(--brand-height);
+        margin: 0 !important;
+        min-height: var(--brand-height);
+    }
+
+    .home-screen .game-title {
+        font-size: clamp(3.75rem, 7vw, 5.75rem);
+    }
+
+    .home-tagline {
+        font-size: clamp(1.5rem, 2.8vw, 1.9rem);
+    }
+
+    .home-actions {
+        width: min(100%, 620px);
+    }
+
+    .start-button {
+        font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+    }
+
+    .secondary-button {
+        font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+    }
+
+    .fun-fact {
+        width: min(100%, 540px);
+        font-size: 0.85rem;
+    }
+
+    .game-screen {
+        padding-top: 40px;
+    }
+
+    .score-panel {
+        gap: 10px;
+    }
+
+    .time-warning {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .home-screen .game-title {
+        font-size: clamp(4.5rem, 5vw, 7rem);
+    }
+
+    .home-tagline {
+        font-size: clamp(1.7rem, 2vw, 2.25rem);
+    }
+
+    .can-stage {
+        width: min(100%, 560px);
+    }
+
+    .home-actions {
+        width: min(100%, 680px);
+    }
+
+    .start-button {
+        padding: 20px 24px;
+        font-size: clamp(1.15rem, 1.3vw, 1.5rem);
+    }
+
+    .secondary-button {
+        padding: 16px 14px;
+        font-size: clamp(0.9rem, 1vw, 1.1rem);
+    }
+
+    .fun-fact {
+        width: min(100%, 620px);
+        padding: 12px 18px;
+    }
+
+    .fun-fact p {
+        font-size: clamp(0.85rem, 1vw, 1rem);
+    }
+
+    .brand-strip {
+        font-size: clamp(0.9rem, 1vw, 1.1rem);
+    }
+}
+
+@media (max-height: 700px) {
+    .home-screen {
+        padding-top: 48px;
+    }
+
+    .home-screen .game-title {
+        margin-top: 0;
+    }
+
+    .home-copy {
+        padding-top: 0;
+    }
+
+    .can-stage {
+        flex-basis: clamp(100px, 20vh, 150px);
+        margin-top: 2px;
+        margin-bottom: 6px;
+    }
+
+    .home-actions {
+        top: 0;
+    }
+
+    .start-button {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .secondary-actions {
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .secondary-button {
+        padding-top: 9px;
+        padding-bottom: 9px;
+    }
+
+    .fun-fact {
+        max-height: 52px;
+        margin-top: 6px;
+        margin-bottom: 6px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+
+    .fun-fact p {
+        -webkit-line-clamp: 2;
+    }
+
+    .brand-strip {
+        min-height: 48px;
+        padding-top: 4px;
+        padding-bottom: 4px;
     }
 }
 
@@ -1464,4 +1648,14 @@ body,
 
 #game-container {
     cursor: none;
+}
+
+main > #brand-strip:not([hidden]) {
+    display: flex !important;
+    position: fixed !important;
+    inset: auto 0 env(safe-area-inset-bottom, 0px) !important;
+    z-index: 100 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: #000000 !important;
 }

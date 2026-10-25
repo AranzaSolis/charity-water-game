@@ -42,6 +42,7 @@ const funFacts = [
 
 const homeScreen = document.getElementById("home-screen");
 const gameScreen = document.getElementById("game-screen");
+const brandStrip = document.getElementById("brand-strip");
 const scoreElement = document.getElementById("score");
 const timeElement = document.getElementById("time");
 const timeWarningElement = document.getElementById("time-warning");
@@ -227,6 +228,7 @@ function startGame() {
   timeElement.textContent = timeRemaining;
   resetTimeWarning();
   homeScreen.hidden = true;
+  brandStrip.hidden = true;
   gameScreen.hidden = false;
   moveBucket(gameContainer.offsetWidth / 2);
 
@@ -343,6 +345,7 @@ function returnHome() {
   clearDrops();
   gameScreen.hidden = true;
   homeScreen.hidden = false;
+  brandStrip.hidden = false;
   showRandomFunFact();
 }
 
