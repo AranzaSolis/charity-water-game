@@ -80,9 +80,7 @@ const storeItems = {
   buckets: [
     { id: "bucket-jerry", name: "Jerry Can", price: 0, icon: "🪣", className: "bucket-jerry" },
     { id: "bucket-classic", name: "Classic", price: 65, icon: "", className: "bucket-classic" },
-    { id: "bucket-coral", name: "Coral", price: 100, icon: "🪣", className: "bucket-coral" },
-    { id: "bucket-crystal", name: "Crystal Bucket", price: 100, icon: "✨", className: "bucket-crystal" },
-    { id: "bucket-golden", name: "Golden Well", price: 175, icon: "🏆", className: "bucket-golden" }
+    { id: "bucket-coral", name: "Coral", price: 100, icon: "🪣", className: "bucket-coral" }
   ],
   borders: [
     { id: "border-basic", name: "Default", price: 0, icon: "", className: "border-basic" },
@@ -91,6 +89,11 @@ const storeItems = {
     { id: "border-purple", name: "Purple", price: 175, icon: "", className: "border-purple" }
   ]
 };
+
+if (!storeItems.buckets.some((item) => item.id === equippedBucket)) {
+  equippedBucket = "bucket-jerry";
+  localStorage.setItem("equippedBucket", equippedBucket);
+}
 
 totalDropsElement.textContent = totalDrops;
 bestScoreElement.textContent = bestScore;
