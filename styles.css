@@ -1369,7 +1369,7 @@ body.theme-night .score-feedback {
     .brand-strip {
         position: fixed !important;
         right: 0 !important;
-        bottom: env(safe-area-inset-bottom, 0px) !important;
+        bottom: 0 !important;
         left: 0 !important;
         z-index: 5 !important;
         visibility: visible !important;
@@ -1478,7 +1478,7 @@ body.theme-night .score-feedback {
     .brand-strip {
         position: fixed !important;
         right: 0 !important;
-        bottom: env(safe-area-inset-bottom, 0px) !important;
+        bottom: 0 !important;
         left: 0 !important;
         z-index: 5 !important;
         visibility: visible !important;
@@ -1653,9 +1653,28 @@ body,
 main > #brand-strip:not([hidden]) {
     display: flex !important;
     position: fixed !important;
-    inset: auto 0 env(safe-area-inset-bottom, 0px) !important;
-    z-index: 100 !important;
+    inset: auto 0 0 !important;
+    z-index: 1000 !important;
     visibility: visible !important;
     opacity: 1 !important;
+    height: var(--brand-height) !important;
+    min-height: var(--brand-height) !important;
     background: #000000 !important;
+}
+
+.home-screen,
+.game-screen {
+    padding-bottom: calc(var(--brand-height) + 24px);
+}
+
+.home-screen {
+    min-height: 100svh;
+}
+
+.home-screen .fun-fact {
+    margin-bottom: calc(var(--brand-height) + 8px);
+}
+
+.game-screen {
+    min-height: 100svh;
 }
