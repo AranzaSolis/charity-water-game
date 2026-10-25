@@ -1427,10 +1427,16 @@ body.theme-night .score-feedback {
     }
 
     .fun-fact {
+        position: absolute;
+        bottom: 54px;
+        left: 50%;
         align-items: flex-start;
         gap: 7px;
+        width: calc(100% - 28px);
         padding-right: 10px;
         padding-left: 10px;
+        margin: 0;
+        transform: translateX(-50%);
     }
 }
 
